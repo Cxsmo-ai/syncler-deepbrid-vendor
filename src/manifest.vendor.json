@@ -9,14 +9,14 @@
     {
       "name": "Deepbrid",
       "description": "Deepbrid Stremio streams through a static Syncler Express package.",
-      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/main/src/manifest.json",
+      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.1/src/manifest.json",
       "enabled": true
     }
   ],
   "cacheServers": [],
   "defaults": {
     "packages": [
-      "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/main/src/manifest.json"
+      "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.1/src/manifest.json"
     ]
   }
 }
