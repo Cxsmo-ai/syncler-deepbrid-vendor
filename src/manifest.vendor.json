@@ -1,22 +1,22 @@
 {
   "name": "Deepbrid Static Vendor",
   "description": "Static Syncler vendor for Deepbrid Stremio direct stream results.",
-  "tutorial": "https://github.com/Cxsmo-ai/syncler-deepbrid-vendor",
+  "tutorial": "https://www.deepbrid.com/aff/go/pickymarker4906",
   "support": "https://github.com/Cxsmo-ai/syncler-deepbrid-vendor/issues",
-  "website": "https://github.com/Cxsmo-ai/syncler-deepbrid-vendor",
+  "website": "https://www.deepbrid.com/aff/go/pickymarker4906",
   "version": 1,
   "packages": [
     {
       "name": "Deepbrid",
       "description": "Deepbrid Stremio streams through a static Syncler Express package.",
-      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.1/src/manifest.json",
+      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.2/src/manifest.json",
       "enabled": true
     }
   ],
   "cacheServers": [],
   "defaults": {
     "packages": [
-      "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.1/src/manifest.json"
+      "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.2/src/manifest.json"
     ]
   }
 }

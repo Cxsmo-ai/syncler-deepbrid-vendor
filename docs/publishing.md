@@ -6,7 +6,7 @@
 2. Use the raw URL for `src/manifest.vendor.json`.
 
 ```text
-https://raw.githubusercontent.com/YOUR_USER/syncler-deepbrid-vendor/v0.1.1/src/manifest.vendor.json
+https://raw.githubusercontent.com/YOUR_USER/syncler-deepbrid-vendor/v0.1.2/src/manifest.vendor.json
 ```
 
 This repo uses absolute raw GitHub URLs in the committed manifests. If you fork it, replace `Cxsmo-ai` in those URLs with your GitHub username or organization and update the tag/ref if needed.

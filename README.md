@@ -2,6 +2,12 @@
 
 Static Syncler Express vendor package for Deepbrid Stremio results.
 
+Deepbrid referral/signup link:
+
+```text
+https://www.deepbrid.com/aff/go/pickymarker4906
+```
+
 This package does not host an API. Syncler provides the media IDs, then this package calls Deepbrid's Stremio stream routes directly:
 
 ```text
@@ -15,6 +21,7 @@ GET https://www.deepbrid.com/stremio/{deepbridApiKey}~qall.s0.rar1/stream/series
 - Calls the same Deepbrid Stremio routes as the Deepbrid Stremio addon.
 - Maps `streams[]` into direct playable sources.
 - Uses a managed Deepbrid account token in Syncler.
+- Shows the Deepbrid referral/signup link in the package/account branding where Syncler exposes provider websites.
 - Verifies the account through Deepbrid's `/stremio/api/account?apikey=...` endpoint.
 - Requires no bridge, proxy, server, or hosted API.
 
@@ -58,7 +65,7 @@ Publish this repo to GitHub and use raw URLs or GitHub Pages.
 Raw vendor URL example:
 
 ```text
-https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.1/src/manifest.vendor.json
+https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.2/src/manifest.vendor.json
 ```
 
 Package URLs inside the manifests use absolute raw GitHub URLs so Syncler does not need to resolve relative paths.

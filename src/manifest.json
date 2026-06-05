@@ -4,13 +4,13 @@
   "description": "Static Syncler Express package that calls Deepbrid Stremio stream routes directly.",
   "version": 1,
   "type": "express",
-  "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.1/src/express.json",
+  "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.2/src/express.json",
   "accounts": [
     {
       "alias": "deepbrid",
       "branding": {
         "name": "Deepbrid",
-        "website": "https://www.deepbrid.com",
+        "website": "https://www.deepbrid.com/aff/go/pickymarker4906",
         "logo": "https://www.deepbrid.com/application/default/themes/okagev4/public/img/logo-dark.png"
       },
       "auth": {
