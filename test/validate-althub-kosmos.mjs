@@ -37,6 +37,7 @@ function parseItems(json) {
 const vendor = readJson("src/manifest.vendor.json");
 const manifest = readJson("src/althub-kosmos-manifest.json");
 const source = read("src/althub-kosmos.ts");
+const builtSource = read("src/althub-kosmos.js");
 const movieFixture = readJson("test/althub-fixtures/movie-inception.json");
 const episodeFixture = readJson("test/althub-fixtures/episode-breaking-bad-s01e01.json");
 const videoPath = path.join(root, "assets/deepbrid-caching.mp4");
@@ -45,12 +46,17 @@ const forbiddenDeepbridKey = ["86a9618a6d0ce3610df6ccb7b4c77fb", "927eb1d98f81e5
 
 assert.ok(vendor.packages.some((pkg) => pkg.name === "Deepbrid Althub Cache"), "vendor must list Althub package");
 assert.equal(manifest.type, "kosmos");
-assert.equal(manifest.url, "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.0/src/althub-kosmos.ts");
+assert.equal(manifest.url, "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.1/src/althub-kosmos.js");
+assert.ok(!manifest.url.endsWith(".ts"), "Kosmos manifest must point to built JavaScript, not TypeScript");
 assert.ok(manifest.accounts.some((account) => account.alias === "deepbrid"));
 assert.ok(manifest.accounts.some((account) => account.alias === "althub"));
 
 assert.ok(source.includes("PLACEHOLDER_VIDEO_URL"));
 assert.ok(source.includes("deepbrid-caching.mp4"));
+assert.ok(source.includes("providerPackage"));
+assert.ok(builtSource.includes('root["provider-package"]'));
+assert.ok(builtSource.includes("providerPackage"));
+assert.ok(builtSource.includes("src/althub-kosmos.js") === false);
 assert.ok(source.includes("env.storage"));
 assert.ok(source.includes("/usenet/add"));
 assert.ok(source.includes('url.searchParams.delete("apikey")'));
@@ -61,6 +67,8 @@ assert.ok(source.includes("t: \"tvsearch\""));
 assert.ok(source.includes("placeholderSource"));
 assert.ok(!source.includes(forbiddenAlthubKey), "Althub key must not be committed");
 assert.ok(!source.includes(forbiddenDeepbridKey), "Deepbrid key must not be committed");
+assert.ok(!builtSource.includes(forbiddenAlthubKey), "Althub key must not be committed in JS build");
+assert.ok(!builtSource.includes(forbiddenDeepbridKey), "Deepbrid key must not be committed in JS build");
 
 for (const [label, fixture] of [["movie", movieFixture], ["episode", episodeFixture]]) {
   const items = parseItems(fixture);

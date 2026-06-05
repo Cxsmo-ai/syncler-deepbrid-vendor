@@ -4,7 +4,7 @@
   "description": "Static Kosmos provider that searches Althub/Newznab, submits NZB URLs to Deepbrid Usenet, and returns a caching placeholder while links are pending.",
   "version": 1,
   "type": "kosmos",
-  "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.0/src/althub-kosmos.ts",
+  "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.1/src/althub-kosmos.js",
   "accounts": [
     {
       "alias": "deepbrid",

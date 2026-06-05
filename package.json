@@ -1,6 +1,6 @@
 {
   "name": "syncler-deepbrid-vendor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Static Syncler Express vendor package for Deepbrid Stremio stream results.",
   "type": "module",

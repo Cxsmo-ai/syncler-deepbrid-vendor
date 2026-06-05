@@ -2,7 +2,7 @@ import { Episode, Movie, Package, Provider, ProviderMetadata, Season, Show, Sour
 
 const ALTHUB_BASE_URL = "https://api.althub.co.za/api";
 const DEEPBRID_BASE_URL = "https://www.deepbrid.com/api/v1";
-const PLACEHOLDER_VIDEO_URL = "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.0/assets/deepbrid-caching.mp4";
+const PLACEHOLDER_VIDEO_URL = "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.1/assets/deepbrid-caching.mp4";
 
 const SEARCH_TTL_MS = 24 * 60 * 60 * 1000;
 const CAPS_TTL_MS = 7 * 24 * 60 * 60 * 1000;
@@ -358,3 +358,5 @@ export class DeepbridAlthubPackage implements Package {
     return Promise.resolve(provider);
   }
 }
+
+export const providerPackage = new DeepbridAlthubPackage();
