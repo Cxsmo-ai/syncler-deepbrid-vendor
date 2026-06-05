@@ -9,23 +9,7 @@
 https://raw.githubusercontent.com/YOUR_USER/syncler-deepbrid-vendor/main/src/manifest.vendor.json
 ```
 
-If Syncler does not resolve relative manifest URLs, edit:
-
-```json
-"url": "./manifest.json"
-```
-
-to:
-
-```json
-"url": "https://raw.githubusercontent.com/YOUR_USER/syncler-deepbrid-vendor/main/src/manifest.json"
-```
-
-and edit package `url` to:
-
-```json
-"url": "https://raw.githubusercontent.com/YOUR_USER/syncler-deepbrid-vendor/main/src/express.json"
-```
+This repo uses absolute raw GitHub URLs in the committed manifests. If you fork it, replace `Cxsmo-ai` in those URLs with your GitHub username or organization.
 
 ## GitHub Pages
 

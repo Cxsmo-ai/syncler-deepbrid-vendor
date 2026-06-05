@@ -60,14 +60,7 @@ Raw vendor URL example:
 https://raw.githubusercontent.com/YOUR_USER/syncler-deepbrid-vendor/main/src/manifest.vendor.json
 ```
 
-Package URLs inside the manifests currently use local relative paths:
-
-```json
-"url": "./manifest.json"
-"url": "./express.json"
-```
-
-If Syncler does not resolve relative URLs in your install path, replace them with absolute raw or GitHub Pages URLs before publishing.
+Package URLs inside the manifests use absolute raw GitHub URLs so Syncler does not need to resolve relative paths.
 
 ## Expected Results
 

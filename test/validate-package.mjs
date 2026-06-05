@@ -36,11 +36,13 @@ const episodeFixture = readJson("test/fixtures/stream_series_breaking_bad_s01e01
 
 assert.equal(vendor.name, "Deepbrid Static Vendor");
 assert.ok(Array.isArray(vendor.packages), "vendor packages must be an array");
-assert.equal(vendor.packages[0].url, "./manifest.json");
+assert.match(vendor.packages[0].manifest, /^https:\/\/raw\.githubusercontent\.com\/Cxsmo-ai\/syncler-deepbrid-vendor\/main\/src\/manifest\.json$/);
+assert.ok(Array.isArray(vendor.defaults.packages), "vendor defaults packages must be an array");
+assert.equal(vendor.defaults.packages[0], vendor.packages[0].manifest);
 
 assert.equal(manifest.id, "com.deepbrid.syncler.static");
 assert.equal(manifest.type, "express");
-assert.equal(manifest.url, "./express.json");
+assert.match(manifest.url, /^https:\/\/raw\.githubusercontent\.com\/Cxsmo-ai\/syncler-deepbrid-vendor\/main\/src\/express\.json$/);
 assert.ok(Array.isArray(manifest.accounts), "manifest accounts must be an array");
 assert.equal(manifest.accounts[0].alias, "deepbrid");
 assert.match(manifest.accounts[0].verification.url, /\/stremio\/\{managedAccounts\.deepbrid\.token\}\/manifest\.json$/);
