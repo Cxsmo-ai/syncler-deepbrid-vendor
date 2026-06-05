@@ -45,7 +45,9 @@ assert.equal(manifest.type, "express");
 assert.match(manifest.url, /^https:\/\/raw\.githubusercontent\.com\/Cxsmo-ai\/syncler-deepbrid-vendor\/main\/src\/express\.json$/);
 assert.ok(Array.isArray(manifest.accounts), "manifest accounts must be an array");
 assert.equal(manifest.accounts[0].alias, "deepbrid");
-assert.match(manifest.accounts[0].verification.url, /\/stremio\/\{managedAccounts\.deepbrid\.token\}\/manifest\.json$/);
+assert.equal(manifest.accounts[0].auth.inject.query.apikey, "{managedAccounts.deepbrid.token}");
+assert.equal(manifest.accounts[0].verification.url, "https://www.deepbrid.com/stremio/api/account");
+assert.equal(manifest.accounts[0].verification.extract.username.value, "$.username");
 
 assert.ok(express.deepbrid, "express provider must include deepbrid");
 assert.equal(express.deepbrid.base_url, "https://www.deepbrid.com/stremio/");

@@ -14,6 +14,25 @@ s0 = size preference value 0
 rar1 = include RAR/7z streaming results
 ```
 
+## Managed Account Verification
+
+Syncler asks for the Deepbrid API key as a managed account token. The package verifies it with:
+
+```text
+GET https://www.deepbrid.com/stremio/api/account?apikey={token}
+```
+
+Expected response:
+
+```json
+{
+  "success": true,
+  "username": "account name"
+}
+```
+
+The same token is then interpolated into the Deepbrid Stremio stream route path.
+
 ## Movie Streams
 
 ```text

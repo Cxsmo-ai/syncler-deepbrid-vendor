@@ -15,6 +15,7 @@ GET https://www.deepbrid.com/stremio/{deepbridApiKey}~qall.s0.rar1/stream/series
 - Calls the same Deepbrid Stremio routes as the Deepbrid Stremio addon.
 - Maps `streams[]` into direct playable sources.
 - Uses a managed Deepbrid account token in Syncler.
+- Verifies the account through Deepbrid's `/stremio/api/account?apikey=...` endpoint.
 - Requires no bridge, proxy, server, or hosted API.
 
 ## What It Does Not Do

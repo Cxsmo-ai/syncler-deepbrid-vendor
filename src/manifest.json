@@ -17,16 +17,21 @@
         "type": "token",
         "allowedDomains": [
           "deepbrid.com"
-        ]
+        ],
+        "inject": {
+          "query": {
+            "apikey": "{managedAccounts.deepbrid.token}"
+          }
+        }
       },
       "verification": {
         "method": "GET",
-        "url": "https://www.deepbrid.com/stremio/{managedAccounts.deepbrid.token}/manifest.json",
+        "url": "https://www.deepbrid.com/stremio/api/account",
         "responseType": "json",
         "extract": {
-          "name": {
+          "username": {
             "type": "jsonpath",
-            "value": "$.name"
+            "value": "$.username"
           }
         }
       }
