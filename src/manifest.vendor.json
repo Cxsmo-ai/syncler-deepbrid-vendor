@@ -1,0 +1,13 @@
+{
+  "name": "Deepbrid Static Vendor",
+  "description": "Static Syncler vendor for Deepbrid Stremio direct stream results.",
+  "version": 1,
+  "packages": [
+    {
+      "name": "Deepbrid",
+      "description": "Deepbrid Stremio streams through a static Syncler Express package.",
+      "url": "./manifest.json",
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "syncler-deepbrid-vendor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static Syncler Express vendor package for Deepbrid Stremio stream results.",
+  "type": "module",
+  "scripts": {
+    "test": "node test/validate-package.mjs",
+    "live:movie": "node test/live-deepbrid-check.mjs movie tt1375666",
+    "live:episode": "node test/live-deepbrid-check.mjs episode tt0903747 1 1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

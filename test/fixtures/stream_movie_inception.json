@@ -1,0 +1,19 @@
+{
+  "streams": [
+    {
+      "url": "https://usenet-3.myfast.link:8183/get/example-movie/1/Inception.example.mkv",
+      "name": "Deepbrid 4K",
+      "title": "Premium / MULTI\nREMUX / HEVC / HDR10\nDTS-HD MA / 74.37 GB / MKV",
+      "behaviorHints": {
+        "notWebReady": false,
+        "bingeGroup": "deepbrid-usenet-tt1375666-2160p-remux-h265",
+        "videoSize": 79853765334,
+        "filename": "Inception.example.mkv"
+      }
+    }
+  ],
+  "_expected": {
+    "observedCount": 31,
+    "fixtureCount": 1
+  }
+}

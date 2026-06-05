@@ -1,0 +1,19 @@
+{
+  "streams": [
+    {
+      "url": "https://usenet-3.myfast.link:8183/get/example-series/1/Breaking.Bad.S01E01.example.mkv",
+      "name": "Deepbrid 4K",
+      "title": "Premium / MULTI\nWEB-DL / HEVC\nDD5.1 / 5.55 GB / MKV",
+      "behaviorHints": {
+        "notWebReady": false,
+        "bingeGroup": "deepbrid-usenet-tt0903747-2160p-web-h265",
+        "videoSize": 5961524044,
+        "filename": "Breaking.Bad.S01E01.example.mkv"
+      }
+    }
+  ],
+  "_expected": {
+    "observedCount": 18,
+    "fixtureCount": 1
+  }
+}

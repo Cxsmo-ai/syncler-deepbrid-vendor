@@ -1,0 +1,49 @@
+{
+  "deepbrid": {
+    "name": "Deepbrid",
+    "enabled": true,
+    "languages": [
+      "en"
+    ],
+    "base_url": "https://www.deepbrid.com/stremio/",
+    "response_type": "json",
+    "time_to_wait_between_each_request_ms": 300,
+    "time_to_wait_on_too_many_request_ms": 5000,
+    "movie": {
+      "query": "{managedAccounts.deepbrid.token}~qall.s0.rar1/stream/movie/{imdbId}.json",
+      "keywords": "{imdbId}"
+    },
+    "episode": {
+      "query": "{managedAccounts.deepbrid.token}~qall.s0.rar1/stream/series/{showImdbId}:{season}:{episode}.json",
+      "keywords": "{showImdbId}:{season}:{episode}"
+    },
+    "json_format": {
+      "results": "streams",
+      "url": "url",
+      "title": "title",
+      "host": "url",
+      "host:ops": [
+        {
+          "name": "regex",
+          "params": [
+            "^https?://([^/:]+)"
+          ]
+        }
+      ],
+      "size": "title",
+      "size:ops": [
+        {
+          "name": "regex",
+          "params": [
+            "([0-9]+(?:\\.[0-9]+)?\\s*(?:MB|GB|TB))"
+          ]
+        }
+      ],
+      "playbackFileName": "behaviorHints.filename",
+      "playbackFileSize": "behaviorHints.videoSize"
+    },
+    "title_replacement": {
+      "\\n": " | "
+    }
+  }
+}
