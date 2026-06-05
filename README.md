@@ -2,12 +2,6 @@
 
 Static Syncler Express vendor package for Deepbrid Stremio results.
 
-Deepbrid referral/signup link:
-
-```text
-https://www.deepbrid.com/aff/go/pickymarker4906
-```
-
 This package does not host an API. Syncler provides the media IDs, then this package calls Deepbrid's Stremio stream routes directly:
 
 ```text
@@ -99,3 +93,17 @@ Package URLs inside the manifests use absolute raw GitHub URLs so Syncler does n
 For the same Deepbrid API key, preference suffix, IMDb ID, and season/episode, this package should show the same underlying Deepbrid stream results as the Stremio addon.
 
 Display may differ because Syncler formats sources differently than Stremio.
+
+<a id="support-links"></a>
+
+## Support Links
+
+This project is free to use. If you want to support it or sign up through the project link, use:
+
+- Deepbrid referral/signup: https://www.deepbrid.com/aff/go/pickymarker4906
+
+Reddit posts should link to this section instead of posting referral links directly:
+
+```text
+https://github.com/Cxsmo-ai/syncler-deepbrid-vendor#support-links
+```
