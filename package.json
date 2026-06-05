@@ -1,13 +1,16 @@
 {
   "name": "syncler-deepbrid-vendor",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Static Syncler Express vendor package for Deepbrid Stremio stream results.",
   "type": "module",
   "scripts": {
-    "test": "node test/validate-package.mjs",
+    "test": "node test/validate-package.mjs && node test/validate-althub-kosmos.mjs",
     "live:movie": "node test/live-deepbrid-check.mjs movie tt1375666",
-    "live:episode": "node test/live-deepbrid-check.mjs episode tt0903747 1 1"
+    "live:episode": "node test/live-deepbrid-check.mjs episode tt0903747 1 1",
+    "live:althub:caps": "node test/live-althub-check.mjs caps",
+    "live:althub:movie": "node test/live-althub-check.mjs movie tt1375666",
+    "live:althub:episode": "node test/live-althub-check.mjs episode \"Breaking Bad\" 1 1"
   },
   "engines": {
     "node": ">=18"

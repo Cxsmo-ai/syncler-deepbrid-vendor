@@ -1,0 +1,48 @@
+{
+  "channel": {
+    "response": {
+      "@attributes": {
+        "offset": "0",
+        "total": "38"
+      }
+    },
+    "item": [
+      {
+        "title": "Breaking.Bad.S01E01.Pilot.1080p.BluRay.AV1.DDP5.1-dAV1nci",
+        "category": "TV > HD",
+        "enclosure": {
+          "@attributes": {
+            "url": "https://api.althub.co.za/getnzb/exampleepisode.nzb&i=130955&r=REDACTED",
+            "type": "application/x-nzb"
+          }
+        },
+        "attr": [
+          {
+            "@attributes": {
+              "name": "category",
+              "value": "5040"
+            }
+          },
+          {
+            "@attributes": {
+              "name": "guid",
+              "value": "cdfe212a3a6900208e586b78d180a7b2"
+            }
+          },
+          {
+            "@attributes": {
+              "name": "size",
+              "value": "1925190839"
+            }
+          },
+          {
+            "@attributes": {
+              "name": "sha1",
+              "value": "a5a1a108af01a831d63edd99bfb4170c9ca755bf"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

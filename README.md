@@ -25,6 +25,24 @@ GET https://www.deepbrid.com/stremio/{deepbridApiKey}~qall.s0.rar1/stream/series
 - Verifies the account through Deepbrid's `/stremio/api/account?apikey=...` endpoint.
 - Requires no bridge, proxy, server, or hosted API.
 
+## Packages
+
+### Deepbrid
+
+Stable Express package that calls Deepbrid's official Stremio stream routes directly.
+
+### Deepbrid Althub Cache
+
+Experimental Kosmos package for Althub/Newznab NZB results through Deepbrid Usenet.
+
+It searches Althub, submits NZB URLs to Deepbrid, uses local Syncler storage to avoid repeated indexer hits, and returns a small placeholder video while Deepbrid is caching:
+
+```text
+assets/deepbrid-caching.mp4
+```
+
+Because Syncler managed-account support is officially documented for `json_format` providers, the Althub Kosmos package also includes code fallbacks for package settings if account tokens are not exposed to Kosmos at runtime.
+
 ## What It Does Not Do
 
 - It does not search Cinemeta.
@@ -38,6 +56,9 @@ GET https://www.deepbrid.com/stremio/{deepbridApiKey}~qall.s0.rar1/stream/series
 src/manifest.vendor.json
 src/manifest.json
 src/express.json
+src/althub-kosmos-manifest.json
+src/althub-kosmos.ts
+assets/deepbrid-caching.mp4
 ```
 
 Use `manifest.vendor.json` as the vendor entry point when installing in Syncler.
@@ -65,7 +86,7 @@ Publish this repo to GitHub and use raw URLs or GitHub Pages.
 Raw vendor URL example:
 
 ```text
-https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.2/src/manifest.vendor.json
+https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.0/src/manifest.vendor.json
 ```
 
 Package URLs inside the manifests use absolute raw GitHub URLs so Syncler does not need to resolve relative paths.
