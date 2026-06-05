@@ -96,14 +96,36 @@ Display may differ because Syncler formats sources differently than Stremio.
 
 <a id="support-links"></a>
 
-## Support Links
+# 🎁 Support The Project: Deepbrid Referral Guide
 
-This project is free to use. If you want to support it or sign up through the project link, use:
+This vendor package is **100% free and open-source**. However, maintaining and updating this project takes significant time and effort. 
 
-- Deepbrid referral/signup: https://www.deepbrid.com/aff/go/pickymarker4906
+The **ONLY** way to support this project and ensure its continued development is by using our **Deepbrid Referral Link** when you sign up or renew your account.
 
-Reddit posts should link to this section instead of posting referral links directly:
+### 👉 [CLICK HERE TO SIGN UP FOR DEEPBRID](https://www.deepbrid.com/aff/go/pickymarker4906) 👈
+
+---
+
+## 🛑 How to Properly Use the Referral Link (IMPORTANT)
+
+To ensure the referral tracks correctly and supports the project, please follow these exact steps:
+
+1. **Clear Your Cookies/Cache** (or use an Incognito/Private Browsing window) to ensure no old tracking cookies interfere.
+2. **Click this exact link**: **[https://www.deepbrid.com/aff/go/pickymarker4906](https://www.deepbrid.com/aff/go/pickymarker4906)**
+3. **Create your account** or **log in** immediately after clicking the link.
+4. **Purchase your premium plan** in the same browsing session. 
+
+> [!IMPORTANT]
+> If you navigate away and come back later, the referral tracking might drop. **Always click the link right before making your purchase!**
+
+## 📢 Sharing on Reddit & Forums
+
+If you are sharing this vendor package on Reddit or other community forums, **please do not post the raw referral link directly**, as it often gets blocked by spam filters. 
+
+Instead, **link directly to this section of the README** so users can read the instructions and click the link here:
 
 ```text
 https://github.com/Cxsmo-ai/syncler-deepbrid-vendor#support-links
 ```
+
+**Thank you for your support! Your contributions keep this project alive.**
