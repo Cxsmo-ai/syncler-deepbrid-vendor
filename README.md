@@ -43,6 +43,8 @@ assets/deepbrid-caching.mp4
 
 Because Syncler managed-account support is officially documented for `json_format` providers, the Althub Kosmos package also includes code fallbacks for package settings if account tokens are not exposed to Kosmos at runtime.
 
+This package is intentionally not included in vendor defaults because Syncler currently documents managed accounts as `json_format` only. Without a bridge or a future Syncler Kosmos account API, a no-host static package cannot safely combine an Althub key with a Deepbrid key and POST NZBs to Deepbrid.
+
 ## What It Does Not Do
 
 - It does not search Cinemeta.
@@ -87,7 +89,7 @@ Publish this repo to GitHub and use raw URLs or GitHub Pages.
 Raw vendor URL example:
 
 ```text
-https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.1/src/manifest.vendor.json
+https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.2/src/manifest.vendor.json
 ```
 
 Package URLs inside the manifests use absolute raw GitHub URLs so Syncler does not need to resolve relative paths.

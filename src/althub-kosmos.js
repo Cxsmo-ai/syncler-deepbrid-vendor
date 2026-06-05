@@ -10,7 +10,7 @@
   const SourceTypes = packageSdk.SourceTypes;
   const ALTHUB_BASE_URL = "https://api.althub.co.za/api";
   const DEEPBRID_BASE_URL = "https://www.deepbrid.com/api/v1";
-  const PLACEHOLDER_VIDEO_URL = "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.1/assets/deepbrid-caching.mp4";
+  const PLACEHOLDER_VIDEO_URL = "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.2/assets/deepbrid-caching.mp4";
   const SEARCH_TTL_MS = 24 * 60 * 60 * 1000;
   const PENDING_TTL_MS = 7 * 24 * 60 * 60 * 1000;
   const PLAYABLE_TTL_MS = 6 * 60 * 60 * 1000;
@@ -288,10 +288,12 @@
     }
 
     async searchMovie(movie) {
+      if (!althubApiKey() || !deepbridApiKey()) return [placeholderSource({ title: "Syncler Kosmos cannot access managed account keys" })];
       return resolveItems(await searchMovieItems(movie));
     }
 
     async searchEpisode(episode) {
+      if (!althubApiKey() || !deepbridApiKey()) return [placeholderSource({ title: "Syncler Kosmos cannot access managed account keys" })];
       return resolveItems(await searchEpisodeItems(episode));
     }
 

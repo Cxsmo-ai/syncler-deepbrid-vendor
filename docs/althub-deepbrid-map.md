@@ -54,7 +54,7 @@ When Deepbrid is still processing an NZB, the package returns:
 ```text
 name: Deepbrid Caching
 title: [Caching] ... retry in a minute
-url: https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.1/assets/deepbrid-caching.mp4
+url: https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.2/assets/deepbrid-caching.mp4
 ```
 
 This is intentionally similar to Stremio addons that show a placeholder stream while an uncached torrent is being added.

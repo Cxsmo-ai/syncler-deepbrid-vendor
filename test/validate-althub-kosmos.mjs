@@ -46,10 +46,10 @@ const forbiddenDeepbridKey = ["86a9618a6d0ce3610df6ccb7b4c77fb", "927eb1d98f81e5
 
 assert.ok(vendor.packages.some((pkg) => pkg.name === "Deepbrid Althub Cache"), "vendor must list Althub package");
 assert.equal(manifest.type, "kosmos");
-assert.equal(manifest.url, "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.1/src/althub-kosmos.js");
+assert.equal(manifest.url, "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.2/src/althub-kosmos.js");
 assert.ok(!manifest.url.endsWith(".ts"), "Kosmos manifest must point to built JavaScript, not TypeScript");
-assert.ok(manifest.accounts.some((account) => account.alias === "deepbrid"));
-assert.ok(manifest.accounts.some((account) => account.alias === "althub"));
+assert.ok(!("accounts" in manifest), "Kosmos manifest should not declare managed accounts");
+assert.equal(vendor.defaults.packages.length, 1, "Althub experimental package should not auto-install");
 
 assert.ok(source.includes("PLACEHOLDER_VIDEO_URL"));
 assert.ok(source.includes("deepbrid-caching.mp4"));

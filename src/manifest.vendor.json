@@ -14,16 +14,15 @@
     },
     {
       "name": "Deepbrid Althub Cache",
-      "description": "Althub/Newznab NZB results submitted to Deepbrid Usenet with local pending/cache placeholders.",
-      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.1/src/althub-kosmos-manifest.json",
-      "enabled": true
+      "description": "Experimental Kosmos package. Syncler currently does not expose managed accounts to Kosmos, so this is listed but not auto-installed.",
+      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.2/src/althub-kosmos-manifest.json",
+      "enabled": false
     }
   ],
   "cacheServers": [],
   "defaults": {
     "packages": [
-      "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.2/src/manifest.json",
-      "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.1/src/althub-kosmos-manifest.json"
+      "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.2/src/manifest.json"
     ]
   }
 }
