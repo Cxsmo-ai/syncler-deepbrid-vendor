@@ -66,3 +66,19 @@
  assert.ok(s01e01File.link.startsWith("https://"));
  
  console.log("Deepbrid Usenet Finder Kosmos package validation passed.");
+ import vm from "node:vm";
+ 
+ // Test evaluation in a standalone sandbox without package-sdk
+ const sandbox = {};
+ vm.runInNewContext(builtSource, sandbox);
+ const pkg = sandbox.providerPackage || sandbox["provider-package"]?.providerPackage || sandbox.default;
+ assert.ok(pkg, "exported package must exist on sandbox root");
+ assert.equal(typeof pkg.createProviderMetadata, "function", "createProviderMetadata must be a function");
+ const metadataList = await pkg.createProviderMetadata();
+ assert.ok(Array.isArray(metadataList) && metadataList.length > 0, "metadata list must be non-empty");
+ assert.equal(metadataList[0].name, "Deepbrid Usenet Finder");
+ const provider = await pkg.createProvider(metadataList[0]);
+ assert.ok(provider, "createProvider must return provider instance");
+ assert.equal(typeof provider.searchMovie, "function", "searchMovie must be a function");
+ assert.equal(typeof provider.searchEpisode, "function", "searchEpisode must be a function");
+ 

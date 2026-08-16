@@ -1,13 +1,32 @@
  (function (root, factory) {
    if (typeof module === "object" && module.exports) {
-     module.exports = factory(require("package-sdk"));
+     var sdk;
+     try { sdk = require("package-sdk"); } catch (e) { sdk = (root && root["package-sdk"]) || {}; }
+     module.exports = factory(sdk);
    } else if (typeof define === "function" && define.amd) {
      define(["package-sdk"], factory);
    } else {
-     root["provider-package"] = factory(root["package-sdk"]);
+     var target = (typeof globalThis !== "undefined") ? globalThis : (typeof self !== "undefined") ? self : (typeof window !== "undefined") ? window : (typeof global !== "undefined") ? global : root || this || {};
+     var sdk = (target && target["package-sdk"]) || (root && root["package-sdk"]) || {};
+     var exported = factory(sdk);
+     if (target) {
+       target["provider-package"] = exported;
+       target.providerPackage = exported.providerPackage || exported;
+       target.default = exported.default || exported;
+     }
+     if (root && root !== target) {
+       root["provider-package"] = exported;
+       root.providerPackage = exported.providerPackage || exported;
+       root.default = exported.default || exported;
+     }
    }
- })(typeof self !== "undefined" ? self : this, function (packageSdk) {
-   const SourceTypes = packageSdk.SourceTypes;
+ })(typeof self !== "undefined" ? self : typeof global !== "undefined" ? global : this, function (packageSdk) {
+   var SourceTypes = (packageSdk && packageSdk.SourceTypes) || {
+     FREE_HOSTER: "FREE_HOSTER",
+     DEBRID: "DEBRID",
+     TORRENT: "TORRENT",
+     DIRECT: "DIRECT"
+   };
    const DEEPBRID_BASE_URL = "https://www.deepbrid.com/api/v1";
    const FINDER_USER_AGENT = "Deepbrid/1.0 (ios) DBX/k9Q4mZ2xV7bN1pR8sT3wY6cH0jL5dF";
    const SEARCH_TTL_MS = 12 * 60 * 60 * 1000;
