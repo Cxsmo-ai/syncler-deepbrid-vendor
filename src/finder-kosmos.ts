@@ -488,4 +488,5 @@
  }
  
  export const providerPackage = new DeepbridFinderPackage();
+ export default providerPackage;
  

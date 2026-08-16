@@ -20,9 +20,10 @@
      }
    ],
   "cacheServers": [],
-  "defaults": {
-     "packages": [
-       "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.0/src/manifest.json"
-     ]
-  }
+   "defaults": {
+      "packages": [
+        "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.0/src/manifest.json",
+        "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.0/src/finder-kosmos-manifest.json"
+      ]
+   }
 }

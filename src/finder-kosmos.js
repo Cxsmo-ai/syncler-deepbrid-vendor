@@ -474,5 +474,6 @@
      }
    }
  
-   return { providerPackage: new DeepbridFinderPackage() };
+   const pkgInstance = new DeepbridFinderPackage();
+   return { providerPackage: pkgInstance, default: pkgInstance };
  });
