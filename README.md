@@ -1,90 +1,85 @@
-# Syncler Deepbrid Static Vendor
-
-Static Syncler Express vendor package for Deepbrid Stremio results.
-
-This package does not host an API. Syncler provides the media IDs, then this package calls Deepbrid's Stremio stream routes directly:
-
-```text
-GET https://www.deepbrid.com/stremio/{deepbridApiKey}~qall.s0.rar1/stream/movie/{imdbId}.json
-GET https://www.deepbrid.com/stremio/{deepbridApiKey}~qall.s0.rar1/stream/series/{showImdbId}:{season}:{episode}.json
-```
-
-## What It Does
-
-- Uses Syncler-supplied IMDb IDs.
-- Calls the same Deepbrid Stremio routes as the Deepbrid Stremio addon.
-- Maps `streams[]` into direct playable sources.
-- Uses a managed Deepbrid account token in Syncler.
-- Shows the Deepbrid referral/signup link in the package/account branding where Syncler exposes provider websites.
-- Verifies the account through Deepbrid's `/stremio/api/account?apikey=...` endpoint.
-- Requires no bridge, proxy, server, or hosted API.
-
-## Packages
-
-### Deepbrid
-
-Stable Express package that calls Deepbrid's official Stremio stream routes directly.
-
-### Deepbrid Althub Cache
-
-Experimental Kosmos package for Althub/Newznab NZB results through Deepbrid Usenet.
-
-It searches Althub, submits NZB URLs to Deepbrid, uses local Syncler storage to avoid repeated indexer hits, and returns a small placeholder video while Deepbrid is caching:
-
-```text
-assets/deepbrid-caching.mp4
-```
-
-Because Syncler managed-account support is officially documented for `json_format` providers, the Althub Kosmos package also includes code fallbacks for package settings if account tokens are not exposed to Kosmos at runtime.
-
-This package is intentionally not included in vendor defaults because Syncler currently documents managed accounts as `json_format` only. Without a bridge or a future Syncler Kosmos account API, a no-host static package cannot safely combine an Althub key with a Deepbrid key and POST NZBs to Deepbrid.
-
-## What It Does Not Do
-
-- It does not search Cinemeta.
-- It does not scrape sites.
-- It does not resolve torrents manually.
-- It does not store or publish a Deepbrid API key.
-
-## Files
-
-```text
-src/manifest.vendor.json
-src/manifest.json
-src/express.json
-src/althub-kosmos-manifest.json
-src/althub-kosmos.ts
-src/althub-kosmos.js
-assets/deepbrid-caching.mp4
-```
-
-Use `manifest.vendor.json` as the vendor entry point when installing in Syncler.
-
-## Local Validation
-
-```powershell
-npm test
-```
-
-Optional live checks:
-
-```powershell
-$env:DEEPBRID_API_KEY="your-deepbrid-api-key"
-npm run live:movie
-npm run live:episode
-```
-
-The live checks only verify route shape and stream counts. They do not write your key to disk.
-
-## Publishing
-
-Publish this repo to GitHub and use raw URLs or GitHub Pages.
-
-Raw vendor URL example:
-
-```text
-https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.2/src/manifest.vendor.json
-```
+ # Syncler Deepbrid Static Vendor
+ 
+ Static Syncler vendor package providing direct Deepbrid Stremio streams and native **Deepbrid Usenet Finder** search support.
+ 
+ This package requires no bridge, proxy, server, or hosted API.
+ 
+ ## What It Does
+ 
+ - **Deepbrid Stremio Express**: Directly calls Deepbrid's Stremio stream endpoints (`/stream/movie/{imdbId}.json` & `/stream/series/{imdbId}:{season}:{episode}.json`) for instant cached streams.
+ - **Deepbrid Usenet Finder Kosmos**: Searches Deepbrid's native Usenet index (`/usenet/finder/search`), automatically extracts multi-part/RAR/7z archives (`/usenet/finder/content?token=...&archives=1`), and returns direct streamable links.
+ - **Zero Hosted Infrastructure**: Runs purely static manifests and client-side JavaScript inside Syncler.
+ - **Account Integration**: Connects with Deepbrid API keys via Syncler managed accounts or package settings.
+ 
+ ## Packages
+ 
+ ### 1. Deepbrid (Express)
+ 
+ Stable Express package that queries Deepbrid's official Stremio stream routes using Syncler-supplied IMDb IDs:
+ 
+ ```text
+ GET https://www.deepbrid.com/stremio/{deepbridApiKey}~qall.s0.rar1/stream/movie/{imdbId}.json
+ GET https://www.deepbrid.com/stremio/{deepbridApiKey}~qall.s0.rar1/stream/series/{showImdbId}:{season}:{episode}.json
+ ```
+ 
+ ### 2. Deepbrid Usenet Finder (Kosmos)
+ 
+ Native Kosmos provider that searches Deepbrid's internal Usenet Finder index:
+ 
+ 1. Queries `https://www.deepbrid.com/api/v1/usenet/finder/search?q={query}` using title, year, and episode tags (`S01E01`).
+ 2. Ranks and scores results by release quality (2160p/4K, 1080p, Remux, BluRay, WEB-DL).
+ 3. Calls `https://www.deepbrid.com/api/v1/usenet/finder/content?token={token}&archives=1` to extract RAR/7z archives into direct playable video links on Deepbrid servers.
+ 4. Uses Syncler storage (`env.storage`) to cache search queries and content tokens, minimizing API latency.
+ 
+ ## What It Does Not Do
+ 
+ - It does not require any 3rd party indexers.
+ - It does not search Cinemeta.
+ - It does not scrape torrent sites.
+ - It does not store or publish a Deepbrid API key.
+ 
+ ## Files
+ 
+ ```text
+ src/manifest.vendor.json
+ src/manifest.json
+ src/express.json
+ src/finder-kosmos-manifest.json
+ src/finder-kosmos.ts
+ src/finder-kosmos.js
+ docs/finder-deepbrid-map.md
+ docs/route-map.md
+ ```
+ 
+ Use `manifest.vendor.json` as the vendor entry point when installing in Syncler.
+ 
+ ## Local Validation
+ 
+ ```powershell
+ npm test
+ ```
+ 
+ Optional live checks:
+ 
+ ```powershell
+ $env:DEEPBRID_API_KEY="your-deepbrid-api-key"
+ npm run live:movie
+ npm run live:episode
+ npm run live:finder:movie Inception
+ npm run live:finder:episode "Breaking Bad" 1 1
+ ```
+ 
+ The live checks only verify route shape and stream counts. They do not write your key to disk.
+ 
+ ## Publishing
+ 
+ Publish this repo to GitHub and use raw URLs or GitHub Pages.
+ 
+ Raw vendor URL example:
+ 
+ ```text
+ https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.0/src/manifest.vendor.json
+ ```
 
 Package URLs inside the manifests use absolute raw GitHub URLs so Syncler does not need to resolve relative paths.
 

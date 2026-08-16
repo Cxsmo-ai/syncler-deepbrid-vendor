@@ -1,0 +1,20 @@
+ {
+   "error": 0,
+   "title": "Breaking.Bad.Season.1.1080p.BluRay.x264-ROVERS",
+   "files": [
+     {
+       "name": "Breaking.Bad.S01E01.Pilot.1080p.mkv",
+       "link": "https://debrid-dl.example.com/download/bb_s01e01.mkv",
+       "size": 2411724800,
+       "size_human": "2.25 GB"
+     },
+     {
+       "name": "Breaking.Bad.S01E02.Cat's.in.the.Bag.1080p.mkv",
+       "link": "https://debrid-dl.example.com/download/bb_s01e02.mkv",
+       "size": 2350000000,
+       "size_human": "2.19 GB"
+     }
+   ],
+   "has_password": false,
+   "password": ""
+ }

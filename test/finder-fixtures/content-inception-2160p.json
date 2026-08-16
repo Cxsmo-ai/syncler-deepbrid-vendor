@@ -1,0 +1,20 @@
+ {
+   "error": 0,
+   "title": "Inception.2010.2160p.UHD.BluRay.REMUX.HEVC.DTS-HD.MA.5.1-EPSiLON",
+   "files": [
+     {
+       "name": "Inception.2010.2160p.UHD.BluRay.REMUX.HEVC.DTS-HD.MA.5.1-EPSiLON.mkv",
+       "link": "https://debrid-dl.example.com/download/inception2160p.mkv",
+       "size": 79853765334,
+       "size_human": "74.37 GB"
+     },
+     {
+       "name": "Inception.2010.2160p.nfo",
+       "link": "https://debrid-dl.example.com/download/inception2160p.nfo",
+       "size": 4210,
+       "size_human": "4.1 KB"
+     }
+   ],
+   "has_password": false,
+   "password": ""
+ }

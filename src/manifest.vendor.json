@@ -5,24 +5,24 @@
   "support": "https://github.com/Cxsmo-ai/syncler-deepbrid-vendor/issues",
   "website": "https://www.deepbrid.com/aff/go/pickymarker4906",
   "version": 1,
-  "packages": [
-    {
-      "name": "Deepbrid",
-      "description": "Deepbrid Stremio streams through a static Syncler Express package.",
-      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.2/src/manifest.json",
-      "enabled": true
-    },
-    {
-      "name": "Deepbrid Althub Cache",
-      "description": "Experimental Kosmos package. Syncler currently does not expose managed accounts to Kosmos, so this is listed but not auto-installed.",
-      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.2.2/src/althub-kosmos-manifest.json",
-      "enabled": false
-    }
-  ],
+   "packages": [
+     {
+       "name": "Deepbrid",
+       "description": "Deepbrid Stremio streams through a static Syncler Express package.",
+       "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.0/src/manifest.json",
+       "enabled": true
+     },
+     {
+       "name": "Deepbrid Usenet Finder",
+       "description": "Searches Deepbrid's native Usenet index and resolves direct playable streams with archive extraction.",
+       "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.0/src/finder-kosmos-manifest.json",
+       "enabled": true
+     }
+   ],
   "cacheServers": [],
   "defaults": {
-    "packages": [
-      "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.1.2/src/manifest.json"
-    ]
+     "packages": [
+       "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.0/src/manifest.json"
+     ]
   }
 }
