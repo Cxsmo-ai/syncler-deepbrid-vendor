@@ -4,5 +4,5 @@
    "description": "Searches Deepbrid's native Usenet index and resolves direct streamable links with automatic archive extraction.",
    "version": 1,
    "type": "kosmos",
-   "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.0/src/finder-kosmos.js"
+    "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.1/src/finder-kosmos.js"
  }
