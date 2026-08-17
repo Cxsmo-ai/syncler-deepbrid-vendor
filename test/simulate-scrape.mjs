@@ -1,9 +1,12 @@
- import fs from "node:fs";
- import vm from "node:vm";
- 
- const code = fs.readFileSync("syncler-deepbrid-vendor/src/finder-kosmos.js", "utf8");
- 
- const mockHttp = {
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import vm from "node:vm";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const code = fs.readFileSync(path.resolve(__dirname, "../src/finder-kosmos.js"), "utf8");
+
+const mockHttp = {
    get: async (url, opts) => {
      console.log("HTTP GET requested URL:", url);
      console.log("HTTP Headers:", opts.headers);

@@ -75,11 +75,11 @@
  
  Publish this repo to GitHub and use raw URLs or GitHub Pages.
  
- Raw vendor URL example:
- 
- ```text
- https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.4/src/manifest.vendor.json
- ```
+Raw vendor URL example:
+
+```text
+https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.5/src/manifest.vendor.json
+```
 
 Package URLs inside the manifests use absolute raw GitHub URLs so Syncler does not need to resolve relative paths.
 

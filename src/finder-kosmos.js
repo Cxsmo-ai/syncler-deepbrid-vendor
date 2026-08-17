@@ -1,11 +1,14 @@
- (function (root, factory) {
-   if (typeof module === "object" && module.exports) {
-     var sdk;
-     try { sdk = require("package-sdk"); } catch (e) { sdk = (root && root["package-sdk"]) || {}; }
-     module.exports = factory(sdk);
-   } else if (typeof define === "function" && define.amd) {
-     define(["package-sdk"], factory);
-   } else {
+(function (root, factory) {
+  if (typeof module === "object" && module.exports) {
+    var sdk;
+    try { sdk = require("package-sdk"); } catch (e) { sdk = (root && root["package-sdk"]) || {}; }
+    var exported = factory(sdk);
+    module.exports = exported;
+    module.exports.default = exported.default || exported;
+    module.exports.providerPackage = exported.providerPackage || exported;
+  } else if (typeof define === "function" && define.amd) {
+    define(["package-sdk"], factory);
+  } else {
      var target = (typeof globalThis !== "undefined") ? globalThis : (typeof self !== "undefined") ? self : (typeof window !== "undefined") ? window : (typeof global !== "undefined") ? global : root || this || {};
      var sdk = (target && target["package-sdk"]) || (root && root["package-sdk"]) || {};
      var exported = factory(sdk);
@@ -30,11 +33,11 @@
    };
    const DEEPBRID_BASE_URL = "https://www.deepbrid.com/api/v1";
    const FINDER_USER_AGENT = "Deepbrid/1.0 (ios) DBX/k9Q4mZ2xV7bN1pR8sT3wY6cH0jL5dF";
-   const SEARCH_TTL_MS = 12 * 60 * 60 * 1000;
-   const CONTENT_TTL_MS = 6 * 60 * 60 * 1000;
-   const MAX_CANDIDATES = 6;
- 
-   const VIDEO_EXTENSIONS_REGEX = /\.(mkv|mp4|avi|ts|m4v|mov|webm|wmv|flv|iso)$/i;
+  const SEARCH_TTL_MS = 12 * 60 * 60 * 1000;
+  const CONTENT_TTL_MS = 6 * 60 * 60 * 1000;
+  const MAX_CANDIDATES = 4;
+
+  const VIDEO_EXTENSIONS_REGEX = /\.(mkv|mp4|avi|ts|m4v|mov|webm|wmv|flv|iso)$/i;
    const NON_VIDEO_EXTENSIONS_REGEX = /\.(par2|nfo|nzb|sfv|srr|txt|jpg|png|gif|srt|sub|idx|exe|apk|zip)$/i;
    const SAMPLE_REGEX = /(sample|trailer|featurette)/i;
  
@@ -154,98 +157,147 @@
      return false;
    }
  
-   function safeHash(value) {
-     let hash = 2166136261;
-     for (let index = 0; index < value.length; index += 1) {
-       hash ^= value.charCodeAt(index);
-       hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
-     }
-     return (hash >>> 0).toString(16);
-   }
- 
-   function deepbridApiKey() {
-     if (typeof env === "undefined") return "";
- 
-     if (env.accounts) {
-       if (env.accounts.deepbrid) {
-         if (typeof env.accounts.deepbrid === "string") return env.accounts.deepbrid.trim();
-         if (env.accounts.deepbrid.token) return String(env.accounts.deepbrid.token).trim();
-         if (env.accounts.deepbrid.apiKey) return String(env.accounts.deepbrid.apiKey).trim();
-         if (env.accounts.deepbrid.key) return String(env.accounts.deepbrid.key).trim();
-       }
-       if (Array.isArray(env.accounts)) {
-         for (var i = 0; i < env.accounts.length; i += 1) {
-           var acc = env.accounts[i];
-           if (acc && (acc.alias === "deepbrid" || acc.name === "deepbrid" || acc.id === "deepbrid")) {
-             if (acc.token) return String(acc.token).trim();
-             if (acc.apiKey) return String(acc.apiKey).trim();
-           }
-         }
-         if (env.accounts[0] && env.accounts[0].token) return String(env.accounts[0].token).trim();
-       }
-     }
- 
-     if (env.account) {
-       if (typeof env.account === "string") return env.account.trim();
-       if (env.account.token) return String(env.account.token).trim();
-       if (env.account.apiKey) return String(env.account.apiKey).trim();
-       if (env.account.key) return String(env.account.key).trim();
-     }
- 
-     if (env.settings) {
-       if (env.settings.deepbridApiKey) return String(env.settings.deepbridApiKey).trim();
-       if (env.settings.apiKey) return String(env.settings.apiKey).trim();
-       if (env.settings.token) return String(env.settings.token).trim();
-       if (env.settings.key) return String(env.settings.key).trim();
-     }
- 
-     return "";
-   }
- 
-   function accountHash() {
-     return safeHash(deepbridApiKey());
-   }
- 
-   async function getCache(key) {
-     if (typeof env === "undefined" || !env.storage || !env.storage.getItem) return undefined;
-     try {
-       const raw = await env.storage.getItem(key);
-       if (!raw) return undefined;
-       const record = JSON.parse(raw);
-       if (record.expiresAt < now()) {
-         await env.storage.removeItem(key);
-         return undefined;
-       }
-       return record.value;
-     } catch {
-       return undefined;
-     }
-   }
- 
-   async function setCache(key, value, ttlMs) {
-     if (typeof env === "undefined" || !env.storage || !env.storage.setItem) return;
-     try {
-       await env.storage.setItem(key, JSON.stringify({ expiresAt: now() + ttlMs, value: value }));
-     } catch {
-       // ignored
-     }
-   }
- 
-   async function safeHttpGet(url, headers) {
-     if (typeof env === "undefined" || !env.http || !env.http.create) return null;
-     try {
-       var client = env.http.create();
-       var res = await client.get(url, { headers: headers });
-       if (!res) return null;
-       var raw = res.data != null ? res.data : res.body != null ? res.body : res;
-       if (typeof raw === "string") {
-         try { return JSON.parse(raw); } catch (e) { return null; }
-       }
-       return raw;
-     } catch (err) {
-       return null;
-     }
-   }
+  function safeHash(value) {
+    let hash = 2166136261;
+    for (let index = 0; index < value.length; index += 1) {
+      hash ^= value.charCodeAt(index);
+      hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+    }
+    return (hash >>> 0).toString(16);
+  }
+
+  function getEnv() {
+    if (typeof env !== "undefined" && env) return env;
+    if (typeof globalThis !== "undefined" && globalThis.env) return globalThis.env;
+    if (typeof self !== "undefined" && self.env) return self.env;
+    if (typeof window !== "undefined" && window.env) return window.env;
+    return null;
+  }
+
+  function deepbridApiKey() {
+    const e = getEnv();
+    if (!e) return "";
+
+    if (e.accounts) {
+      if (e.accounts.deepbrid) {
+        if (typeof e.accounts.deepbrid === "string") return e.accounts.deepbrid.trim();
+        if (e.accounts.deepbrid.token) return String(e.accounts.deepbrid.token).trim();
+        if (e.accounts.deepbrid.apiKey) return String(e.accounts.deepbrid.apiKey).trim();
+        if (e.accounts.deepbrid.key) return String(e.accounts.deepbrid.key).trim();
+      }
+      if (Array.isArray(e.accounts)) {
+        for (var i = 0; i < e.accounts.length; i += 1) {
+          var acc = e.accounts[i];
+          if (acc && (acc.alias === "deepbrid" || acc.name === "deepbrid" || acc.id === "deepbrid")) {
+            if (acc.token) return String(acc.token).trim();
+            if (acc.apiKey) return String(acc.apiKey).trim();
+          }
+        }
+        if (e.accounts[0] && e.accounts[0].token) return String(e.accounts[0].token).trim();
+      }
+    }
+
+    if (e.account) {
+      if (typeof e.account === "string") return e.account.trim();
+      if (e.account.token) return String(e.account.token).trim();
+      if (e.account.apiKey) return String(e.account.apiKey).trim();
+      if (e.account.key) return String(e.account.key).trim();
+    }
+
+    if (e.settings) {
+      if (e.settings.deepbridApiKey) return String(e.settings.deepbridApiKey).trim();
+      if (e.settings.apiKey) return String(e.settings.apiKey).trim();
+      if (e.settings.token) return String(e.settings.token).trim();
+      if (e.settings.key) return String(e.settings.key).trim();
+    }
+
+    if (e.config) {
+      if (e.config.deepbridApiKey) return String(e.config.deepbridApiKey).trim();
+      if (e.config.apiKey) return String(e.config.apiKey).trim();
+      if (e.config.token) return String(e.config.token).trim();
+    }
+
+    return "";
+  }
+
+  function accountHash() {
+    return safeHash(deepbridApiKey());
+  }
+
+  async function getCache(key) {
+    const e = getEnv();
+    if (!e || !e.storage || !e.storage.getItem) return undefined;
+    try {
+      const raw = await e.storage.getItem(key);
+      if (!raw) return undefined;
+      const record = JSON.parse(raw);
+      if (record.expiresAt < now()) {
+        await e.storage.removeItem(key);
+        return undefined;
+      }
+      return record.value;
+    } catch {
+      return undefined;
+    }
+  }
+
+  async function setCache(key, value, ttlMs) {
+    const e = getEnv();
+    if (!e || !e.storage || !e.storage.setItem) return;
+    try {
+      await e.storage.setItem(key, JSON.stringify({ expiresAt: now() + ttlMs, value: value }));
+    } catch {
+      // ignored
+    }
+  }
+
+  async function safeHttpGet(url, headers) {
+    const e = getEnv();
+
+    if (e && e.http && e.http.create) {
+      try {
+        var client = e.http.create();
+        var res = await client.get(url, { headers: headers });
+        if (res) {
+          var raw = res.data != null ? res.data : res.body != null ? res.body : res;
+          if (typeof raw === "string") {
+            try { return JSON.parse(raw); } catch (err) { return null; }
+          }
+          return raw;
+        }
+      } catch (err) {
+        // ignore
+      }
+    }
+
+    if (e && e.http && e.http.get) {
+      try {
+        var res2 = await e.http.get(url, { headers: headers });
+        if (res2) {
+          var raw2 = res2.data != null ? res2.data : res2.body != null ? res2.body : res2;
+          if (typeof raw2 === "string") {
+            try { return JSON.parse(raw2); } catch (err2) { return null; }
+          }
+          return raw2;
+        }
+      } catch (err2) {
+        // ignore
+      }
+    }
+
+    if (typeof fetch === "function") {
+      try {
+        var res3 = await fetch(url, { headers: headers });
+        if (res3.ok) {
+          return await res3.json();
+        }
+      } catch (err3) {
+        // ignore
+      }
+    }
+
+    return null;
+  }
  
    async function searchFinderApi(query, category) {
      const key = deepbridApiKey();
@@ -375,14 +427,15 @@
    function findBestVideoFile(files, season, episode) {
      if (!files || !files.length) return null;
  
-     const videoFiles = files.filter(function (file) {
-       if (!file.link) return false;
-       const name = file.name || "";
-       if (NON_VIDEO_EXTENSIONS_REGEX.test(name)) return false;
-       if (!VIDEO_EXTENSIONS_REGEX.test(name)) return false;
-       if (SAMPLE_REGEX.test(name)) return false;
-       return true;
-     });
+    const videoFiles = files.filter(function (file) {
+      if (!file.link) return false;
+      const name = file.name || "";
+      if (NON_VIDEO_EXTENSIONS_REGEX.test(name)) return false;
+      if (!VIDEO_EXTENSIONS_REGEX.test(name)) return false;
+      if (SAMPLE_REGEX.test(name)) return false;
+      if (file.video === true) return true;
+      return true;
+    });
  
      if (!videoFiles.length) {
        const fallbackLinks = files.filter(function (f) {
@@ -405,22 +458,23 @@
      })[0];
    }
  
-   class DeepbridFinderProvider {
-     constructor() {
-       this.metadata = {
-         name: "Deepbrid Usenet Finder",
-         sourceTypes: [
-           SourceTypes.DEBRID || "DEBRID",
-           SourceTypes.TORRENT || "TORRENT",
-           SourceTypes.FREE_HOSTER || "FREE_HOSTER"
-         ],
-         movie: true,
-         episode: true,
-         season: false,
-         anime: false,
-         languages: ["en"]
-       };
-     }
+  class DeepbridFinderProvider {
+    constructor() {
+      this.metadata = {
+        name: "Deepbrid Usenet Finder",
+        sourceTypes: [
+          SourceTypes.DEBRID || "DEBRID",
+          SourceTypes.TORRENT || "TORRENT",
+          SourceTypes.FREE_HOSTER || "FREE_HOSTER",
+          SourceTypes.DIRECT || "DIRECT"
+        ],
+        movie: true,
+        episode: true,
+        season: false,
+        anime: false,
+        languages: ["en"]
+      };
+    }
  
      async searchMovie(movie) {
        const apiKey = deepbridApiKey();
@@ -482,21 +536,22 @@
          const content = contentResults[j].content;
          if (!content || !content.files || !content.files.length) continue;
  
-         const bestFile = findBestVideoFile(content.files);
-         if (bestFile && bestFile.link) {
-           sources.push({
-             url: bestFile.link,
-             name: "Deepbrid Finder",
-             title: item.title || bestFile.name,
-             size: bestFile.size || item.size,
-             type: SourceTypes.DEBRID || "DEBRID",
-             quality: extractQuality(item.title || bestFile.name),
-             resolution: extractResolution(item.title || bestFile.name),
-             seeds: item.sources || 1,
-             filename: bestFile.name || item.title
-           });
-         }
-       }
+        const bestFile = findBestVideoFile(content.files);
+        if (bestFile && bestFile.link) {
+          sources.push({
+            url: bestFile.link,
+            name: "Deepbrid Finder",
+            title: item.title || bestFile.name,
+            size: bestFile.size || item.size,
+            type: SourceTypes.DEBRID || "DEBRID",
+            debrid: "deepbrid",
+            quality: extractQuality(item.title || bestFile.name),
+            resolution: extractResolution(item.title || bestFile.name),
+            seeds: item.sources || 1,
+            filename: bestFile.name || item.title
+          });
+        }
+      }
  
        return sources;
      }
@@ -568,21 +623,22 @@
          const content = contentResults[j].content;
          if (!content || !content.files || !content.files.length) continue;
  
-         const bestFile = findBestVideoFile(content.files, seasonNo, episodeNo);
-         if (bestFile && bestFile.link) {
-           sources.push({
-             url: bestFile.link,
-             name: "Deepbrid Finder",
-             title: item.title || bestFile.name,
-             size: bestFile.size || item.size,
-             type: SourceTypes.DEBRID || "DEBRID",
-             quality: extractQuality(item.title || bestFile.name),
-             resolution: extractResolution(item.title || bestFile.name),
-             seeds: item.sources || 1,
-             filename: bestFile.name || item.title
-           });
-         }
-       }
+        const bestFile = findBestVideoFile(content.files, seasonNo, episodeNo);
+        if (bestFile && bestFile.link) {
+          sources.push({
+            url: bestFile.link,
+            name: "Deepbrid Finder",
+            title: item.title || bestFile.name,
+            size: bestFile.size || item.size,
+            type: SourceTypes.DEBRID || "DEBRID",
+            debrid: "deepbrid",
+            quality: extractQuality(item.title || bestFile.name),
+            resolution: extractResolution(item.title || bestFile.name),
+            seeds: item.sources || 1,
+            filename: bestFile.name || item.title
+          });
+        }
+      }
  
        return sources;
      }

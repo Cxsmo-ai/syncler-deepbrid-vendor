@@ -1,6 +1,6 @@
 {
   "name": "syncler-deepbrid-vendor",
-   "version": "0.3.4",
+   "version": "0.3.5",
    "private": true,
    "description": "Static Syncler Express and Kosmos vendor package for Deepbrid stream and native Usenet Finder results.",
    "type": "module",

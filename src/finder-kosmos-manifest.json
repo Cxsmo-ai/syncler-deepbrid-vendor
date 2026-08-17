@@ -1,40 +1,16 @@
- {
-   "id": "com.deepbrid.syncler.finder",
-   "name": "Deepbrid Usenet Finder",
-   "description": "Searches Deepbrid's native Usenet index and resolves direct streamable links with automatic archive extraction.",
-   "version": 1,
-   "type": "kosmos",
-    "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.4/src/finder-kosmos.js",
-   "accounts": [
+{
+  "id": "com.deepbrid.syncler.finder",
+  "name": "Deepbrid Usenet Finder",
+  "description": "Searches Deepbrid's native Usenet index and resolves direct streamable links with automatic archive extraction.",
+  "version": 1,
+  "type": "kosmos",
+    "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.5/src/finder-kosmos.js",
+   "settings": [
      {
-       "alias": "deepbrid",
-       "branding": {
-         "name": "Deepbrid",
-         "website": "https://www.deepbrid.com/aff/go/pickymarker4906",
-         "logo": "https://www.deepbrid.com/application/default/themes/okagev4/public/img/logo-dark.png"
-       },
-       "auth": {
-         "type": "token",
-         "allowedDomains": [
-           "deepbrid.com"
-         ],
-         "inject": {
-           "query": {
-             "apikey": "{managedAccounts.deepbrid.token}"
-           }
-         }
-       },
-       "verification": {
-         "method": "GET",
-         "url": "https://www.deepbrid.com/stremio/api/account",
-         "responseType": "json",
-         "extract": {
-           "username": {
-             "type": "jsonpath",
-             "value": "$.username"
-           }
-         }
-       }
+       "id": "deepbridApiKey",
+       "name": "Deepbrid API Key",
+       "type": "text",
+       "description": "Deepbrid API Key (optional if Deepbrid Express account is configured)"
      }
    ]
  }
