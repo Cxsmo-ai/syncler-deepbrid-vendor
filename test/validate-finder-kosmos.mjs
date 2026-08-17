@@ -30,7 +30,8 @@
  assert.equal(manifest.type, "kosmos");
  assert.match(manifest.url, /finder-kosmos.js$/);
  assert.ok(!manifest.url.endsWith(".ts"), "Kosmos manifest must point to built JavaScript, not TypeScript");
- assert.ok(!("accounts" in manifest), "Kosmos manifest must not declare accounts");
+ assert.ok(Array.isArray(manifest.accounts), "Kosmos manifest must declare accounts");
+ assert.equal(manifest.accounts[0].alias, "deepbrid");
  assert.equal(vendor.defaults.packages.length, 2, "vendor defaults must include both packages");
  
  assert.ok(source.includes("DEEPBRID_BASE_URL"));
