@@ -4,13 +4,5 @@
   "description": "Searches Deepbrid's native Usenet index and resolves direct streamable links with automatic archive extraction.",
   "version": 1,
   "type": "kosmos",
-    "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.5/src/finder-kosmos.js",
-   "settings": [
-     {
-       "id": "deepbridApiKey",
-       "name": "Deepbrid API Key",
-       "type": "text",
-       "description": "Deepbrid API Key (optional if Deepbrid Express account is configured)"
-     }
-   ]
- }
+  "url": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.6/src/finder-kosmos.js"
+}

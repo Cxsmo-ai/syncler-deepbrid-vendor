@@ -4,26 +4,26 @@
     try { sdk = require("package-sdk"); } catch (e) { sdk = (root && root["package-sdk"]) || {}; }
     var exported = factory(sdk);
     module.exports = exported;
-    module.exports.default = exported.default || exported;
-    module.exports.providerPackage = exported.providerPackage || exported;
+    module.exports.default = exported;
+    module.exports.providerPackage = exported;
   } else if (typeof define === "function" && define.amd) {
     define(["package-sdk"], factory);
   } else {
-     var target = (typeof globalThis !== "undefined") ? globalThis : (typeof self !== "undefined") ? self : (typeof window !== "undefined") ? window : (typeof global !== "undefined") ? global : root || this || {};
+     var target = (typeof globalThis !== "undefined" && globalThis) || (typeof self !== "undefined" && self) || (typeof window !== "undefined" && window) || (typeof global !== "undefined" && global) || root || {};
      var sdk = (target && target["package-sdk"]) || (root && root["package-sdk"]) || {};
      var exported = factory(sdk);
      if (target) {
        target["provider-package"] = exported;
-       target.providerPackage = exported.providerPackage || exported;
-       target.default = exported.default || exported;
+       target.providerPackage = exported;
+       target.default = exported;
      }
      if (root && root !== target) {
        root["provider-package"] = exported;
-       root.providerPackage = exported.providerPackage || exported;
-       root.default = exported.default || exported;
+       root.providerPackage = exported;
+       root.default = exported;
      }
    }
- })(typeof self !== "undefined" ? self : typeof global !== "undefined" ? global : this, function (packageSdk) {
+ })(typeof self !== "undefined" ? self : typeof globalThis !== "undefined" ? globalThis : typeof global !== "undefined" ? global : this, function (packageSdk) {
    var SourceTypes = (packageSdk && packageSdk.SourceTypes) || {
      DEBRID: "DEBRID",
      TORRENT: "TORRENT",
@@ -662,6 +662,10 @@
      }
    }
  
-   const pkgInstance = new DeepbridFinderPackage();
-   return { providerPackage: pkgInstance, default: pkgInstance };
- });
+  const pkgInstance = new DeepbridFinderPackage();
+  pkgInstance.default = pkgInstance;
+  pkgInstance.providerPackage = pkgInstance;
+  pkgInstance.DeepbridFinderPackage = DeepbridFinderPackage;
+  pkgInstance.DeepbridFinderProvider = DeepbridFinderProvider;
+  return pkgInstance;
+});

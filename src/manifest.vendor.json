@@ -9,21 +9,21 @@
     {
       "name": "Deepbrid",
       "description": "Deepbrid Stremio streams through a static Syncler Express package.",
-      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.5/src/manifest.json",
+      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.6/src/manifest.json",
       "enabled": true
     },
     {
       "name": "Deepbrid Usenet Finder",
       "description": "Searches Deepbrid's native Usenet index and resolves direct playable streams with archive extraction.",
-      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.5/src/finder-kosmos-manifest.json",
+      "manifest": "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.6/src/finder-kosmos-manifest.json",
       "enabled": true
     }
   ],
   "cacheServers": [],
    "defaults": {
       "packages": [
-        "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.5/src/manifest.json",
-        "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.5/src/finder-kosmos-manifest.json"
+        "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.6/src/manifest.json",
+        "https://raw.githubusercontent.com/Cxsmo-ai/syncler-deepbrid-vendor/v0.3.6/src/finder-kosmos-manifest.json"
       ]
    }
 }
